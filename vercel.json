@@ -1,7 +1,5 @@
 {
-  "build": {
-    "dist": "dist",
-    "cache": false
-  },
-  "outputDirectory": "dist"
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "installCommand": "npm install"
 }
