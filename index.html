@@ -1,41 +1,457 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Paws Clinic - Veterinaria profesional. Servicios médicos, cirugía, emergencias 24/7. Cuidado integral para tu mascota." />
-    <meta name="keywords" content="veterinaria, mascotas, perros, gatos, cirugía, emergencias 24/7, Ecuador" />
-    <meta name="author" content="Paws Clinic" />
-    <meta name="theme-color" content="#14b8a6">
-    <meta property="og:title" content="Paws Clinic - Veterinaria Profesional" />
-    <meta property="og:description" content="Cuidado integral para tu mascota" />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="es_EC">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="https://paws-clinic-chi.vercel.app">
-    <title>Paws Clinic - Veterinaria 24/7 | Ecuador</title>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "VeterinaryCare",
-        "name": "Paws Clinic",
-        "description": "Veterinaria profesional con emergencias 24/7",
-        "url": "https://paws-clinic-chi.vercel.app",
-        "telephone": "+593999999999",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Guayaquil",
-            "addressCountry": "EC"
-        },
-        "openingHours": "Mo-Su 00:00-23:59",
-        "priceRange": "$$",
-        "image": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600"
-    }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Paws Clinic - Clínica veterinaria premium. Cuidado integral para tu mascota. Servicios 24/7, cirugía, grooming y más.">
+    <meta name="keywords" content="veterinaria, mascotas, perros, gatos, salud animal, Guayaquil">
+    <title>Paws Clinic - Clínica Veterinaria Premium</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <style>
+        :root {
+            --primary: #f472b6;
+            --primary-dark: #ec4899;
+            --secondary: #831843;
+            --accent: #fb7185;
+            --dark: #1f2937;
+            --light: #fefce8;
+            --cream: #fff7ed;
+            --gray: #9ca3af;
+            --glass: rgba(255,255,255,0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--cream);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        h1, h2, h3 { font-family: 'Fredoka', sans-serif; font-weight: 600; }
+        
+        .c { max-width: 1400px; margin: 0 auto; padding: 0 30px; }
+        .sec { padding: 100px 0; }
+        
+        /* Pink gradient */
+        .pink-text {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Floating paw */
+        .floating-paw {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: white;
+            box-shadow: 0 10px 40px rgba(244,114,182,0.5);
+            z-index: 1000;
+            cursor: pointer;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Button */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 10px 30px rgba(244,114,182,0.4);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(244,114,182,0.5);
+        }
+        
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 18px 0;
+            transition: all 0.3s;
+        }
+        .header.scrolled {
+            background: rgba(255,254,240,0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            padding: 12px 0;
+        }
+        .logo {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .logo-icon { font-size: 28px; }
+        
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(180deg, var(--cream) 0%, #fef3c7 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '🐾';
+            position: absolute;
+            font-size: 150px;
+            opacity: 0.08;
+            top: 10%;
+            right: 15%;
+            animation: pawFloat 6s ease-in-out infinite;
+        }
+        .hero::after {
+            content: '🦴';
+            position: absolute;
+            font-size: 100px;
+            opacity: 0.06;
+            bottom: 15%;
+            left: 10%;
+            animation: pawFloat 8s ease-in-out infinite reverse;
+        }
+        @keyframes pawFloat {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 600px; }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(244,114,182,0.15);
+            padding: 8px 18px;
+            border-radius: 50px;
+            color: var(--primary-dark);
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: clamp(40px, 7vw, 72px);
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        .hero p {
+            font-size: 18px;
+            color: var(--gray);
+            margin-bottom: 35px;
+            max-width: 500px;
+        }
+        
+        /* Services Cards */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .service-card {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.12);
+        }
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, rgba(244,114,182,0.2), rgba(251,113,133,0.1));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+        .service-card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+        .service-card p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        /* Features */
+        .features-row {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+        .feature-item {
+            text-align: center;
+        }
+        .feature-emoji {
+            font-size: 50px;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+            color: white;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 70px 0 25px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 50px;
+        }
+        .footer-brand p { color: rgba(255,255,255,0.6); margin: 20px 0; }
+        .social-links { display: flex; gap: 12px; }
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s;
+        }
+        .social-link:hover { background: var(--primary); transform: translateY(-3px); }
+        .footer-title { font-size: 18px; margin-bottom: 25px; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; transition: 0.3s; }
+        .footer-links a:hover { color: var(--primary); }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 25px;
+            text-align: center;
+            color: rgba(255,255,255,0.4);
+            font-size: 14px;
+        }
+        
+        .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+        
+        @media(max-width: 992px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+        @media(max-width: 768px) { .footer-grid { grid-template-columns: 1fr; } .hero::before, .hero::after { display: none; } }
+    </style>
+</head>
+<body>
+    <div class="floating-paw">🐾</div>
+
+    <header class="header" id="header">
+        <div class="c">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+                <a href="#" class="logo">
+                    <span class="logo-icon">🐾</span>
+                    Paws<span class="pink-text">Clinic</span>
+                </a>
+                <nav style="display:flex;gap:30px;align-items:center;">
+                    <a href="#servicios" style="color:var(--dark);text-decoration:none;font-weight:600;">Servicios</a>
+                    <a href="#contacto" style="color:var(--dark);text-decoration:none;font-weight:600;">Contacto</a>
+                    <a href="#contacto" class="btn btn-primary" style="padding:12px 24px;">Emergencia</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="c">
+            <div class="hero-content">
+                <div class="hero-badge fade-up">
+                    <i class="fas fa-heart"></i> Cuidado 24/7
+                </div>
+                <h1 class="fade-up">Donde Tus Mascotas<br><span class="pink-text">Son Familia</span></h1>
+                <p class="fade-up">Clinica veterinaria con amor y profesionalismo. Tu compañero merece el mejor cuidado.</p>
+                <div class="fade-up" style="display:flex;gap:20px;flex-wrap:wrap;">
+                    <a href="#contacto" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Solicitar Cita</a>
+                    <a href="#servicios" class="btn" style="border:2px solid var(--dark);color:var(--dark);">Ver Servicios</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec" id="servicios">
+        <div class="c">
+            <div class="tc" style="margin-bottom:60px;">
+                <h2 class="fade-up" style="font-size:clamp(36px,5vw,52px);margin-bottom:15px;">Nuestros <span class="pink-text">Servicios</span></h2>
+                <p class="fade-up" style="color:var(--gray);font-size:17px;">Todo lo que tu mascota necesita</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-up">
+                    <div class="service-icon">🏥</div>
+                    <h3>Medicina General</h3>
+                    <p>Chequeos, vacunas, tratamientos y medicina preventiva.</p>
+                </div>
+                <div class="service-card fade-up" style="animation-delay:0.1s">
+                    <div class="service-icon">💉</div>
+                    <h3>Cirugía</h3>
+                    <p>Procedimientos quirúrgicos con equipamiento de última generación.</p>
+                </div>
+                <div class="service-card fade-up" style="animation-delay:0.2s">
+                    <div class="service-icon">🦷</div>
+                    <h3>Odontología</h3>
+                    <p>Limpieza dental, extracciones y tratamientos bucales.</p>
+                </div>
+                <div class="service-card fade-up" style="animation-delay:0.3s">
+                    <div class="service-icon">🧬</div>
+                    <h3>Laboratorio</h3>
+                    <p>Exámenes de sangre, orina y análisis clínicos.</p>
+                </div>
+                <div class="service-card fade-up" style="animation-delay:0.4s">
+                    <div class="service-icon">✂️</div>
+                    <h3>Grooming</h3>
+                    <p>Baño, corte de pelo, uñas y cuidado estético.</p>
+                </div>
+                <div class="service-card fade-up" style="animation-delay:0.5s">
+                    <div class="service-icon">🚑</div>
+                    <h3>Emergencias</h3>
+                    <p>Atención 24/7 para situaciones críticas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec" style="background:linear-gradient(180deg,rgba(244,114,182,0.05),transparent);">
+        <div class="c">
+            <div class="tc" style="margin-bottom:50px;">
+                <h2 class="fade-up" style="font-size:42px;">¿Por Qué Elegirnos?</h2>
+            </div>
+            <div class="features-row fade-up">
+                <div class="feature-item">
+                    <span class="feature-emoji">👨‍⚕️</span>
+                    <strong>Veterinarios Expertos</strong>
+                    <p style="color:var(--gray);font-size:14px;">Equipo altamente capacitado</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-emoji">🏥</span>
+                    <strong>Instalaciones Premium</strong>
+                    <p style="color:var(--gray);font-size:14px;">Equipamiento de última generación</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-emoji">❤️</span>
+                    <strong> Amor & Dedicación</strong>
+                    <p style="color:var(--gray);font-size:14px;">Tratamos a cada mascota como familia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="contacto">
+        <div class="c">
+            <div class="tc">
+                <h2 class="fade-up" style="font-size:48px;margin-bottom:20px;">Tu Mascota Te Necesita</h2>
+                <p class="fade-up" style="font-size:18px;opacity:0.9;margin-bottom:35px;">Agenda su cita hoy mismo</p>
+                <a href="#" class="btn fade-up" style="background:white;color:var(--primary-dark);"><i class="fas fa-phone"></i> Llamar Ahora</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="c">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo" style="color:white;margin-bottom:15px;display:block;">
+                        <span>🐾</span> Paws<span class="pink-text">Clinic</span>
+                    </a>
+                    <p>Donde cada mascota recibe el amor y cuidado que merece. Su salud es nuestra prioridad.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">Servicios</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Medicina General</a></li>
+                        <li><a href="#">Cirugía</a></li>
+                        <li><a href="#">Grooming</a></li>
+                        <li><a href="#">Emergencias</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Horario</h4>
+                    <ul class="footer-links">
+                        <li>Lun - Sáb: 08:00 - 20:00</li>
+                        <li>Domingos: 09:00 - 18:00</li>
+                        <li>Emergencias: 24/7</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Contacto</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt" style="margin-right:8px;"></i>Av. Mascota, Guayaquil</li>
+                        <li><i class="fas fa-phone" style="margin-right:8px;"></i>+593 99 999 9999</li>
+                        <li><i class="fas fa-envelope" style="margin-right:8px;"></i>hola@pawsclinic.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">© 2026 Paws Clinic. Todos los derechos reservados. 🐾</div>
+        </div>
+    </footer>
+
+    <script>
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 50));
+
+        const observer = new IntersectionObserver((e) => e.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.from('.hero-content > *', { duration: 0.8, y: 40, opacity: 0, stagger: 0.15, ease: 'back.out(1.7)' });
     </script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+</body>
 </html>
