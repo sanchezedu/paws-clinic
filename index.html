@@ -156,7 +156,9 @@
             0%, 100% { transform: rotate(-10deg); }
             50% { transform: rotate(10deg); }
         }
-        .hero-content { position: relative; z-index: 2; max-width: 600px; }
+        .hero-content { position: relative; z-index: 2; max-width: 500px; }
+        .hero-image { position: absolute; right: 5%; top: 50%; transform: translateY(-50%); width: 45%; max-width: 500px; z-index: 2; }
+        @media(max-width: 992px) { .hero-image { display: none; } }
         .hero-badge {
             display: inline-flex;
             align-items: center;
@@ -314,11 +316,14 @@
                     <i class="fas fa-heart"></i> Cuidado 24/7
                 </div>
                 <h1 class="fade-up">Donde Tus Mascotas<br><span class="pink-text">Son Familia</span></h1>
-                <p class="fade-up">Clinica veterinaria con amor y profesionalismo. Tu compañero merece el mejor cuidado.</p>
+                <p class="fade-up">Clínica veterinaria con amor y profesionalismo.</p>
                 <div class="fade-up" style="display:flex;gap:20px;flex-wrap:wrap;">
                     <a href="#contacto" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Solicitar Cita</a>
                     <a href="#servicios" class="btn" style="border:2px solid var(--dark);color:var(--dark);">Ver Servicios</a>
                 </div>
+            </div>
+            <div class="hero-image fade-up">
+                <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=600" alt="Veterinaria" style="width:100%;border-radius:20px;box-shadow:0 30px 60px rgba(0,0,0,0.2);">
             </div>
         </div>
     </section>
@@ -331,34 +336,40 @@
             </div>
             <div class="services-grid">
                 <div class="service-card fade-up">
+                    <img src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=400" alt="Medicina" style="width:100%;height:180px;object-fit:cover;border-radius:16px;margin-bottom:20px;">
                     <div class="service-icon">🏥</div>
                     <h3>Medicina General</h3>
-                    <p>Chequeos, vacunas, tratamientos y medicina preventiva.</p>
+                    <p>Chequeos, vacunas y tratamientos.</p>
                 </div>
                 <div class="service-card fade-up" style="animation-delay:0.1s">
+                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400" alt="Cirugía" style="width:100%;height:180px;object-fit:cover;border-radius:16px;margin-bottom:20px;">
                     <div class="service-icon">💉</div>
                     <h3>Cirugía</h3>
-                    <p>Procedimientos quirúrgicos con equipamiento de última generación.</p>
+                    <p>Procedimientos quirúrgicos.</p>
                 </div>
                 <div class="service-card fade-up" style="animation-delay:0.2s">
+                    <img src="https://images.unsplash.com/photo-1606265752439-1f18756aa5fc?w=400" alt="Dental" style="width:100%;height:180px;object-fit:cover;border-radius:16px;margin-bottom:20px;">
                     <div class="service-icon">🦷</div>
                     <h3>Odontología</h3>
-                    <p>Limpieza dental, extracciones y tratamientos bucales.</p>
+                    <p>Limpieza y tratamientos.</p>
                 </div>
                 <div class="service-card fade-up" style="animation-delay:0.3s">
+                    <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?w=400" alt="Laboratorio" style="width:100%;height:180px;object-fit:cover;border-radius:16px;margin-bottom:20px;">
                     <div class="service-icon">🧬</div>
                     <h3>Laboratorio</h3>
-                    <p>Exámenes de sangre, orina y análisis clínicos.</p>
+                    <p>Exámenes clínicos.</p>
                 </div>
                 <div class="service-card fade-up" style="animation-delay:0.4s">
+                    <img src="https://images.unsplash.com/photo-1516734212186-a967f81b0b94?w=400" alt="Grooming" style="width:100%;height:180px;object-fit:cover;border-radius:16px;margin-bottom:20px;">
                     <div class="service-icon">✂️</div>
                     <h3>Grooming</h3>
-                    <p>Baño, corte de pelo, uñas y cuidado estético.</p>
+                    <p>Baño y corte de pelo.</p>
                 </div>
                 <div class="service-card fade-up" style="animation-delay:0.5s">
+                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=400" alt="Emergencias" style="width:100%;height:180px;object-fit:cover;border-radius:16px;margin-bottom:20px;">
                     <div class="service-icon">🚑</div>
                     <h3>Emergencias</h3>
-                    <p>Atención 24/7 para situaciones críticas.</p>
+                    <p>Atención 24/7.</p>
                 </div>
             </div>
         </div>
