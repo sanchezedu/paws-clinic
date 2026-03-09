@@ -1,0 +1,5 @@
+# Robots.txt
+User-agent: *
+Allow: /
+Disallow: /node_modules/
+Sitemap: https://paws-clinic-chi.vercel.app/sitemap.xml
