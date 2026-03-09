@@ -4,263 +4,107 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-// Scroll animations hook
-useEffect(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fadeUp')
-        }
-      })
-    },
-    { threshold: 0.1 }
-  )
-  document.querySelectorAll('.animate-on-scroll').forEach((el) => observer.observe(el))
-  return () => observer.disconnect()
-}, [])
-
-// Data
+// Data - Paws Clinic
 const services = [
-  {
-    id: 1,
-    name: "Medicina Preventiva",
-    description: "Vacunación, desparasitación y chequeos regulares",
-    icon: "💉",
-    image: "https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=600&q=80"
-  },
-  {
-    id: 2,
-    name: "Cirugía General",
-    description: "Procedimientos quirúrgicos con tecnología de punta",
-    icon: "🏥",
-    image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&q=80"
-  },
-  {
-    id: 3,
-    name: "Odontología",
-    description: "Limpieza dental y tratamientos bucales",
-    icon: "🦷",
-    image: "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=600&q=80"
-  },
-  {
-    id: 4,
-    name: "Emergencias 24/7",
-    description: "Atención inmediata para tu mascota",
-    icon: "🚨",
-    image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=600&q=80"
-  }
+  { id: 1, name: "Consultas Generales", description: "Chequeos preventivos y diagnóstico", icon: "fas fa-stethoscope", image: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400" },
+  { id: 2, name: "Vacunación", description: "Calendario completo de vacunas", icon: "fas fa-syringe", image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400" },
+  { id: 3, name: "Cirugías", description: "Procedimientos quirúrgicos seguros", icon: "fas fa-cut", image: "https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=400" },
+  { id: 4, name: "Nutrición", description: "Asesoría alimentaria especializada", icon: "fas fa-bone", image: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400" },
+  { id: 5, name: "Laboratorio", description: "Análisis clínicos inmediatos", icon: "fas fa-microscope", image: "https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=400" },
+  { id: 6, name: "Emergencias 24/7", description: "Atención inmediata", icon: "fas fa-truck-medical", image: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=400" }
 ]
 
-const team = [
-  {
-    id: 1,
-    name: "Dra. Carolina Vega",
-    specialty: "Medicina Interna",
-    image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&q=80"
-  },
-  {
-    id: 2,
-    name: "Dr. Marco Hernández",
-    specialty: "Cirugía Veterinaria",
-    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&q=80"
-  },
-  {
-    id: 3,
-    name: "Dra. Ana Lucía Soto",
-    specialty: "Odontología",
-    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&q=80"
-  }
-]
-
-const testimonials = [
-  {
-    id: 1,
-    text: "El mejor cuidado que mi golden ha recibido. Equipo humano excepcional.",
-    author: "Roberto M.",
-    pet: "Thor, Golden Retriever"
-  },
-  {
-    id: 2,
-    text: "Mi gato estaba muy nervioso, pero el trato fue increíblemente gentil.",
-    author: "Sofia R.",
-    pet: "Luna, Gato Persa"
-  },
-  {
-    id: 3,
-    text: "Gracias por salvar a mi bulldog. Son familia para nosotros ahora.",
-    author: "Carlos D.",
-    pet: "Rocky, Bulldog Inglés"
-  }
-]
-
-const plans = [
-  {
-    id: 1,
-    name: "Básico",
-    price: "$29",
-    period: "/mes",
-    features: ["Chequeo anual", "Vacunas incluidas", "Descuento 10% en medicamentos"],
-    popular: false
-  },
-  {
-    id: 2,
-    name: "Plus",
-    price: "$49",
-    period: "/mes",
-    features: ["Chequeos semestrales", "Vacunas + desparasitación", "Descuento 20% en procedimientos", "Emergencias prioritarias"],
-    popular: true
-  },
-  {
-    id: 3,
-    name: "Premium",
-    price: "$79",
-    period: "/mes",
-    features: ["Chequeos trimestrales", "Plan completo de vacunación", "Descuento 30% en todo", "Emergencias 24/7", "Análisis de laboratorio incluidos"],
-    popular: false
-  }
-]
-
-const pets = [
-  "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=300&q=80",
-  "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=300&q=80",
-  "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=300&q=80",
-  "https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=300&q=80",
-  "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?w=300&q=80",
-  "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=300&q=80"
+const features = [
+  { icon: "fas fa-user-md", title: "Veterinarios Certificados", desc: "Equipo experimentado" },
+  { icon: "fas fa-clock", title: "Abierto 24/7", desc: "Siempre disponibles" },
+  { icon: "fas fa-heart-pulse", title: "Equipo Moderno", desc: "Tecnología de punta" }
 ]
 
 function App() {
-  const [scrolled, setScrolled] = useState(false)
-  const [activeService, setActiveService] = useState(0)
-  const [appointmentOpen, setAppointmentOpen] = useState(false)
-
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    gsap.from('.hero-content > *', { duration: 1, y: 40, opacity: 0, stagger: 0.15, ease: 'power3.out' })
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('visible')
+      })
+    }, { threshold: 0.1 })
+    document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
   }, [])
 
   return (
-    <div className="bg-teal-50 text-slate-800 min-h-screen">
-      {/* Floating Appointment Button */}
-      <a 
-        href="#contacto"
-        className="fixed bottom-8 right-8 z-50 bg-teal-500 hover:bg-teal-600 text-white font-bold px-6 py-4 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 flex items-center gap-2 animate-bounce-gentle"
-      >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-        </svg>
-        Agendar Cita
-      </a>
-
-      {/* Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${scrolled ? 'bg-white/90 backdrop-blur-md py-4 shadow-sm' : 'bg-transparent py-8'}`}>
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-2">
-            <span className="text-4xl">🐾</span>
-            <span className="font-display text-2xl font-bold text-teal-700">PAWS CLINIC</span>
+    <div style={{ background: '#f0fdf4', minHeight: '100vh', color: '#0f172a', fontFamily: 'Quicksand, sans-serif' }}>
+      {/* Header */}
+      <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000, padding: '15px 0', background: 'rgba(240,253,244,0.97)', backdropFilter: 'blur(20px)', boxShadow: '0 10px 40px rgba(0,0,0,0.08)' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <a href="#" style={{ fontSize: '24px', fontWeight: 800, color: '#0f172a', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px', fontFamily: 'Nunito, sans-serif' }}>
+            <i className="fas fa-paw" style={{ color: '#22c55e' }}></i> Paws <span style={{ background: 'linear-gradient(135deg, #22c55e, #4ade80)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Clinic</span>
           </a>
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium">
-            <a href="#servicios" className="hover:text-teal-600 transition-colors">Servicios</a>
-            <a href="#equipo" className="hover:text-teal-600 transition-colors">Equipo</a>
-            <a href="#membresías" className="hover:text-teal-600 transition-colors">Membresías</a>
-            <a href="#contacto" className="bg-teal-500 hover:bg-teal-600 text-white px-6 py-2 rounded-full transition-all">
-              Contacto
-            </a>
-          </div>
+          <nav style={{ display: 'flex', gap: '25px', alignItems: 'center' }}>
+            <a href="#servicios" style={{ color: '#0f172a', textDecoration: 'none', fontWeight: 600 }}>Servicios</a>
+            <a href="#contacto" style={{ background: 'linear-gradient(135deg, #22c55e, #16a34a)', color: 'white', padding: '10px 22px', borderRadius: '50px', textDecoration: 'none', fontWeight: 700 }}>Emergencias</a>
+          </nav>
         </div>
-      </nav>
+      </header>
 
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Background with blob effect */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 -left-20 w-96 h-96 bg-teal-200 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
-          <div className="absolute top-1/3 -right-20 w-96 h-96 bg-coral-200 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob" style={{ animationDelay: '2s' }}></div>
-          <div className="absolute -bottom-20 left-1/3 w-96 h-96 bg-amber-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob" style={{ animationDelay: '4s' }}></div>
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <p className="text-teal-600 font-semibold tracking-widest text-sm mb-4 animate-fadeUp">CUIDADO VETERINARIO EXCEPCIONAL</p>
-            <h1 className="font-display text-5xl md:text-7xl font-bold text-slate-800 mb-6 animate-fadeUp" style={{ animationDelay: '0.1s' }}>
-              Donde cada mascota<br/>
-              <span className="text-teal-600">es familia</span>
+      <section style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', padding: '100px 0', background: 'linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%)', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 30px', display: 'flex', alignItems: 'center', width: '100%' }}>
+          <div style={{ maxWidth: '500px' }}>
+            <div className="fade-up" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'white', border: '2px solid #22c55e', padding: '8px 16px', borderRadius: '50px', color: '#22c55e', fontSize: '12px', fontWeight: 700, marginBottom: '18px' }}>
+              <i className="fas fa-heart"></i> Cuidado Excepcional
+            </div>
+            <h1 className="fade-up" style={{ fontSize: 'clamp(36px, 7vw, 62px)', lineHeight: 1.15, marginBottom: '18px', fontFamily: 'Nunito, sans-serif', fontWeight: 800 }}>
+              Tu Mascota<br/>
+              <span style={{ background: 'linear-gradient(135deg, #22c55e, #4ade80)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Es Familia</span>
             </h1>
-            <p className="text-lg text-slate-600 mb-8 max-w-lg animate-fadeUp" style={{ animationDelay: '0.2s' }}>
-              Brindamos atención médica de primer nivel con amor y dedicación. 
-              Tu compañero peludo merece lo mejor.
-            </p>
-            <div className="flex flex-wrap gap-4 animate-fadeUp" style={{ animationDelay: '0.3s' }}>
-              <a href="#contacto" className="bg-teal-500 hover:bg-teal-600 text-white px-8 py-4 rounded-full font-bold transition-all hover:scale-105 shadow-lg">
-                Agendar Cita
+            <p className="fade-up" style={{ fontSize: '17px', color: '#6b7280', marginBottom: '30px' }}>Veterinaria con amor y profesionalismo.</p>
+            <div className="fade-up" style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
+              <a href="#contacto" style={{ background: 'linear-gradient(135deg, #22c55e, #16a34a)', color: 'white', padding: '14px 32px', borderRadius: '50px', textDecoration: 'none', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '10px' }}>
+                <i className="fas fa-calendar-check"></i> Agendar
               </a>
-              <a href="#servicios" className="border-2 border-teal-500 text-teal-600 hover:bg-teal-500 hover:text-white px-8 py-4 rounded-full font-bold transition-all">
-                Ver Servicios
-              </a>
+              <a href="#servicios" style={{ border: '2px solid #0f172a', color: '#0f172a', padding: '14px 32px', borderRadius: '50px', textDecoration: 'none', fontWeight: 700 }}>Servicios</a>
             </div>
           </div>
-          <div className="relative">
-            <img 
-              src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&q=80"
-              alt="Happy dog"
-              className="rounded-3xl shadow-2xl"
-            />
-            <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-4 shadow-xl animate-float">
-              <div className="flex items-center gap-3">
-                <div className="text-3xl">✅</div>
+          <div style={{ position: 'absolute', right: '5%', width: '45%', maxWidth: '450px' }} className="fade-up">
+            <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=600" alt="Veterinaria" style={{ width: '100%', borderRadius: '20px', boxShadow: '0 30px 60px rgba(0,0,0,0.15)' }} />
+          </div>
+        </div>
+      </section>
+
+      {/* Servicios */}
+      <section id="servicios" style={{ padding: '100px 0' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 30px' }}>
+          <h2 className="fade-up" style={{ fontSize: 'clamp(28px, 5vw, 42px)', marginBottom: '12px', fontFamily: 'Nunito, sans-serif', fontWeight: 800 }}>
+            Nuestros <span style={{ background: 'linear-gradient(135deg, #22c55e, #4ade80)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Servicios</span>
+          </h2>
+          <p className="fade-up" style={{ color: '#6b7280', fontSize: '16px', marginBottom: '45px' }}>Todo para la salud de tu mascota</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))', gap: '25px' }}>
+            {services.map((s, i) => (
+              <div key={s.id} className="fade-up" style={{ padding: '30px', background: 'white', borderRadius: '20px', boxShadow: '0 10px 40px rgba(0,0,0,0.06)', transition: 'all 0.4s', animationDelay: `${i * 0.1}s` }}>
+                <div style={{ width: '60px', height: '60px', background: 'linear-gradient(135deg, rgba(34,197,94,0.15,197,94,0.05), rgba(34))', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', color: '#22c55e', marginBottom: '18px' }}>
+                  <i className={s.icon}></i>
+                </div>
+                <h3 style={{ fontSize: '18px', marginBottom: '10px', fontFamily: 'Nunito, sans-serif', fontWeight: 800 }}>{s.name}</h3>
+                <p style={{ color: '#6b7280', fontSize: '14px' }}>{s.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section style={{ padding: '100px 0', background: 'white' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 30px' }}>
+          <div className="fade-up" style={{ display: 'flex', justifyContent: 'center', gap: '60px', flexWrap: 'wrap', padding: '40px 0' }}>
+            {features.map((f, i) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                <div style={{ width: '50px', height: '50px', background: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', color: '#22c55e', boxShadow: '0 5px 20px rgba(0,0,0,0.08)' }}>
+                  <i className={f.icon}></i>
+                </div>
                 <div>
-                  <p className="font-bold text-sm">5000+</p>
-                  <p className="text-xs text-slate-500">Mascotas felices</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services */}
-      <section id="servicios" className="py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <p className="text-teal-600 tracking-[0.3em] text-sm font-semibold mb-4">NUESTROS SERVICIOS</p>
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-slate-800">Cuidado integral</h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((service, index) => (
-              <div 
-                key={service.id}
-                className="group bg-gradient-to-br from-teal-50 to-white rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
-              >
-                <div className="text-5xl mb-4">{service.icon}</div>
-                <h3 className="font-display text-xl font-bold mb-2">{service.name}</h3>
-                <p className="text-slate-600 text-sm">{service.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Services Image Gallery */}
-      <section className="py-20 bg-teal-900">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex gap-4 overflow-x-auto hide-scrollbar">
-            {services.map((service) => (
-              <div key={service.id} className="flex-shrink-0 w-[300px] group relative overflow-hidden rounded-2xl hover-scale">
-                <img 
-                  src={service.image} 
-                  alt={service.name}
-                  className="w-full h-[250px] object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-teal-900/80 to-transparent flex items-end p-6">
-                  <div>
-                    <div className="text-3xl mb-2">{service.icon}</div>
-                    <h3 className="font-display text-xl font-bold text-white">{service.name}</h3>
-                  </div>
+                  <strong style={{ display: 'block' }}>{f.title}</strong>
+                  <p style={{ fontSize: '13px', color: '#6b7280' }}>{f.desc}</p>
                 </div>
               </div>
             ))}
@@ -268,207 +112,64 @@ function App() {
         </div>
       </section>
 
-      {/* Team */}
-      <section id="equipo" className="py-32 bg-teal-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <p className="text-teal-600 tracking-[0.3em] text-sm font-semibold mb-4">NUESTRO EQUIPO</p>
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-slate-800">Profesionales con amor</h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {team.map((member) => (
-              <div key={member.id} className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
-                <div className="relative overflow-hidden">
-                  <img 
-                    src={member.image} 
-                    alt={member.name}
-                    className="w-full h-[350px] object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-teal-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
-                    <span className="bg-white text-teal-700 px-6 py-2 rounded-full font-semibold">
-                      {member.specialty}
-                    </span>
-                  </div>
-                </div>
-                <div className="p-6 text-center">
-                  <h3 className="font-display text-xl font-bold">{member.name}</h3>
-                  <p className="text-teal-600 text-sm">{member.specialty}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Membership Plans */}
-      <section id="membresías" className="py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <p className="text-teal-600 tracking-[0.3em] text-sm font-semibold mb-4">MEMBRESÍAS</p>
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-slate-800">Planes para tu bolsillo</h2>
-            <p className="text-slate-600 mt-4">Elige el plan ideal para el cuidado de tu mascota</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {plans.map((plan) => (
-              <div 
-                key={plan.id}
-                className={`relative rounded-3xl p-8 transition-all duration-300 ${plan.popular ? 'bg-teal-500 text-white shadow-2xl scale-105' : 'bg-teal-50 hover:shadow-xl'}`}
-              >
-                {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-amber-400 text-amber-900 px-4 py-1 rounded-full text-sm font-bold">
-                    Más popular
-                  </div>
-                )}
-                <h3 className="font-display text-2xl font-bold mb-2">{plan.name}</h3>
-                <div className="flex items-baseline gap-1 mb-6">
-                  <span className="text-4xl font-bold">{plan.price}</span>
-                  <span className={`text-sm ${plan.popular ? 'text-teal-100' : 'text-slate-500'}`}>{plan.period}</span>
-                </div>
-                <ul className="space-y-3 mb-8">
-                  {plan.features.map((feature, i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm">
-                      <span className="text-lg">✓</span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <button className={`w-full py-4 rounded-full font-bold transition-all hover:scale-105 ${plan.popular ? 'bg-white text-teal-600 hover:bg-teal-50' : 'bg-teal-500 text-white hover:bg-teal-600'}`}>
-                  Elegir Plan
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-32 bg-teal-900 text-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-teal-300 tracking-[0.3em] text-sm font-semibold mb-8">TESTIMONIOS</p>
-          
-          <div className="grid gap-8">
-            {testimonials.map((testimonial) => (
-              <div key={testimonial.id} className="bg-white/10 rounded-3xl p-8 backdrop-blur-sm">
-                <p className="font-display text-xl md:text-2xl italic mb-6">"{testimonial.text}"</p>
-                <div>
-                  <p className="font-bold">{testimonial.author}</p>
-                  <p className="text-teal-300 text-sm">{testimonial.pet}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Instagram Gallery */}
-      <section className="py-20 overflow-hidden">
-        <div className="flex animate-marquee whitespace-nowrap">
-          {[...pets, ...pets].map((pet, i) => (
-            <div key={i} className="flex-shrink-0 w-[250px] h-[250px] mx-2 relative group overflow-hidden rounded-2xl">
-              <img 
-                src={pet} 
-                alt={`Pet ${i}`}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-teal-500/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <span className="text-white font-bold">❤️</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Contact */}
-      <section id="contacto" className="py-32 bg-teal-50">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-slate-800 mb-6">Agenda tu cita</h2>
-          <p className="text-slate-600 mb-12">Tu mascota te agradecerá</p>
-          
-          <form className="bg-white rounded-3xl p-8 shadow-xl">
-            <div className="grid md:grid-cols-2 gap-6 mb-6">
-              <input 
-                type="text" 
-                placeholder="Tu nombre"
-                className="w-full bg-teal-50 border-0 rounded-xl px-6 py-4 focus:ring-2 focus:ring-teal-500 outline-none"
-              />
-              <input 
-                type="tel" 
-                placeholder="Tu teléfono"
-                className="w-full bg-teal-50 border-0 rounded-xl px-6 py-4 focus:ring-2 focus:ring-teal-500 outline-none"
-              />
-            </div>
-            <div className="grid md:grid-cols-2 gap-6 mb-6">
-              <input 
-                type="text" 
-                placeholder="Nombre de tu mascota"
-                className="w-full bg-teal-50 border-0 rounded-xl px-6 py-4 focus:ring-2 focus:ring-teal-500 outline-none"
-              />
-              <select className="w-full bg-teal-50 border-0 rounded-xl px-6 py-4 focus:ring-2 focus:ring-teal-500 outline-none">
-                <option>Tipo de mascota</option>
-                <option>Perro</option>
-                <option>Gato</option>
-                <option>Otro</option>
-              </select>
-            </div>
-            <textarea 
-              placeholder="¿En qué podemos ayudarte?"
-              rows={4}
-              className="w-full bg-teal-50 border-0 rounded-xl px-6 py-4 focus:ring-2 focus:ring-teal-500 outline-none mb-6"
-            ></textarea>
-            <button className="w-full bg-teal-500 hover:bg-teal-600 text-white font-bold py-4 rounded-xl transition-all hover:scale-[1.02]">
-              Enviar Solicitud
-            </button>
-          </form>
+      {/* CTA */}
+      <section id="contacto" style={{ background: 'linear-gradient(135deg, #22c55e, #16a34a)', color: 'white', padding: '80px 0', textAlign: 'center' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 30px' }}>
+          <h2 className="fade-up" style={{ fontSize: '42px', marginBottom: '15px', fontFamily: 'Nunito, sans-serif', fontWeight: 800 }}>¿Tu Mascota te Necesita?</h2>
+          <p className="fade-up" style={{ fontSize: '17px', opacity: 0.9, marginBottom: '30px' }}>Agenda tu cita ahora</p>
+          <a href="#" className="fade-up" style={{ background: 'white', color: '#22c55e', padding: '14px 32px', borderRadius: '50px', textDecoration: 'none', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '10px' }}>
+            <i className="fas fa-calendar-check"></i> Agendar Cita
+          </a>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-teal-900 text-white py-16">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
+      <footer style={{ background: '#0f172a', color: 'white', padding: '60px 0 25px' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 30px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr 1fr', gap: '35px' }}>
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-3xl">🐾</span>
-                <span className="font-display text-xl font-bold">PAWS CLINIC</span>
+              <a href="#" style={{ fontSize: '24px', fontWeight: 800, color: 'white', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px', fontFamily: 'Nunito, sans-serif' }}>
+                <i className="fas fa-paw" style={{ color: '#22c55e' }}></i> Paws <span style={{ color: '#22c55e' }}>Clinic</span>
+              </a>
+              <p style={{ color: 'rgba(255,255,255,0.6)', margin: '15px 0', fontSize: '14px' }}>Cuidamos a tu mejor amigo.</p>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <a href="#" style={{ width: '40px', height: '40px', background: 'rgba(255,255,255,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}><i className="fab fa-instagram"></i></a>
+                <a href="#" style={{ width: '40px', height: '40px', background: 'rgba(255,255,255,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}><i className="fab fa-facebook-f"></i></a>
+                <a href="#" style={{ width: '40px', height: '40px', background: 'rgba(255,255,255,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}><i className="fab fa-whatsapp"></i></a>
               </div>
-              <p className="text-teal-200 text-sm">Cuidando a tus mejores amigos desde 2015</p>
             </div>
             <div>
-              <h4 className="font-bold mb-4">Servicios</h4>
-              <ul className="space-y-2 text-teal-200 text-sm">
-                <li>Medicina Preventiva</li>
-                <li>Cirugía</li>
-                <li>Odontología</li>
-                <li>Emergencias 24/7</li>
+              <h4 style={{ fontSize: '16px', marginBottom: '18px' }}>Servicios</h4>
+              <ul style={{ listStyle: 'none', padding: 0 }}>
+                <li style={{ marginBottom: '10px' }}><a href="#" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'none', fontSize: '14px' }}>Consultas</a></li>
+                <li style={{ marginBottom: '10px' }}><a href="#" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'none', fontSize: '14px' }}>Cirugías</a></li>
+                <li style={{ marginBottom: '10px' }}><a href="#" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'none', fontSize: '14px' }}>Vacunas</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold mb-4">Contacto</h4>
-              <ul className="space-y-2 text-teal-200 text-sm">
-                <li>📍 Av. Principal 123</li>
-                <li>📞 +593 99 123 4567</li>
-                <li>✉️ hola@pawsclinic.com</li>
+              <h4 style={{ fontSize: '16px', marginBottom: '18px' }}>Horario</h4>
+              <ul style={{ listStyle: 'none', padding: 0 }}>
+                <li style={{ marginBottom: '10px', color: 'rgba(255,255,255,0.6)', fontSize: '14px' }}>Lun - Dom: 24 horas</li>
+                <li style={{ marginBottom: '10px', color: 'rgba(255,255,255,0.6)', fontSize: '14px' }}>Emergencias</li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold mb-4">Síguenos</h4>
-              <div className="flex gap-4">
-                <a href="#" className="w-10 h-10 bg-teal-800 rounded-full flex items-center justify-center hover:bg-teal-600 transition-colors">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                </a>
-                <a href="#" className="w-10 h-10 bg-teal-800 rounded-full flex items-center justify-center hover:bg-teal-600 transition-colors">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-                </a>
-              </div>
+              <h4 style={{ fontSize: '16px', marginBottom: '18px' }}>Contacto</h4>
+              <ul style={{ listStyle: 'none', padding: 0 }}>
+                <li style={{ marginBottom: '10px', color: 'rgba(255,255,255,0.6)', fontSize: '14px' }}><i className="fas fa-map-marker-alt"></i> Guayaquil</li>
+                <li style={{ marginBottom: '10px', color: 'rgba(255,255,255,0.6)', fontSize: '14px' }}><i className="fas fa-phone"></i> +593 99 999 9999</li>
+              </ul>
             </div>
           </div>
-          <div className="border-t border-teal-800 pt-8 text-center text-teal-400 text-sm">
-            <p>© 2026 Paws Clinic. Hecho con ❤️ para tus mascotas</p>
-          </div>
+          <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '20px', textAlign: 'center', color: 'rgba(255,255,255,0.4)', fontSize: '13px', marginTop: '35px' }}>© 2026 Paws Clinic. Todos los derechos reservados.</div>
         </div>
       </footer>
+
+      <style>{`
+        .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+        @media (max-width: 992px) { .hero-image { display: none; } }
+      `}</style>
     </div>
   )
 }
