@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://paws-clinic-chi.vercel.app/sitemap.xml
