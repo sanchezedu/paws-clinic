@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
+// Paws Clinic - Updated 2026-03-09
 // Data - Paws Clinic
 const services = [
   { id: 1, name: "Consultas Generales", description: "Chequeos preventivos y diagnóstico", icon: "fas fa-stethoscope", image: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400" },
